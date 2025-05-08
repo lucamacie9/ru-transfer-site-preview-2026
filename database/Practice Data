@@ -47,8 +47,8 @@ INSERT INTO programs (institution_id, program_name) VALUES
 ((SELECT institution_id FROM institutions WHERE name = 'Roosevelt University'), 'Cybersecurity'),
 ((SELECT institution_id FROM institutions WHERE name = 'Harold Washington College'), 'Information Technology'),
 ((SELECT institution_id FROM institutions WHERE name = 'Harold Washington College'), 'Software Development'),
-((SELECT institution_id FROM institutions WHERE name = 'National Luis University'), 'Computer Forensics'),
-((SELECT institution_id FROM institutions WHERE name = 'National Luis University'), 'Computer Science'),
+((SELECT institution_id FROM institutions WHERE name = 'National Louis University'), 'Computer Forensics'),
+((SELECT institution_id FROM institutions WHERE name = 'National Louis University'), 'Computer Science'),
 ((SELECT institution_id FROM institutions WHERE name = 'University of Chicago'), 'Cloud Computing'),
 ((SELECT institution_id FROM institutions WHERE name = 'University of Chicago'), 'Information Technology');
 
