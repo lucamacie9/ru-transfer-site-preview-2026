@@ -16,8 +16,13 @@ function App() {
     <Routes>
       <Route element={<AppLayout />}>
         <Route path="/" element={<LandingPage />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/register" element={<RegisterPage />} />
         <Route path="/dashboard" element={<DashboardPage />} />
-        {/* ... other routes */}
+        <Route path="/match" element={<MatchPage />} />
+        <Route path="/institutions" element={<InstitutionsPage />} />
+        <Route path="/programs" element={<ProgramsPage />} />
+        <Route path="/about" element={<AboutPage />} />
       </Route>
     </Routes>
   );
