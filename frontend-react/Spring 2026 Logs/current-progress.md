@@ -1,8 +1,19 @@
 # Current Progress – Transfer Credit Match React Frontend
 
-Log of changes and progress for teammates and stakeholders. Intended to be committed and pushed with the repo as development continues.
+Log of changes and progress for teammates. Intended to be committed and pushed with the repo as development continues.
 
 **Location:** This log lives under `frontend-react/Spring 2026 Logs/` so all frontend deliverables (code + docs) are in one place when pushing to origin.
+
+---
+
+## 2026-03-09
+
+### Site skeleton
+
+- **Layout:** Single layout route with `AppLayout` wrapping all pages (placeholder `<nav>`, `<Outlet />`, `<footer>`). No real Navbar or Footer components yet.
+- **Routes:** All page routes in place: `/` (Landing), `/login`, `/register`, `/dashboard`, `/match`, `/institutions`, `/programs`, `/about`. Each route renders a placeholder page component (e.g. `<h1>LandingPage</h1>`).
+- **Stack:** Vite, React 18, TypeScript, React Router 7. Entry in `main.tsx` with `BrowserRouter`; route definitions in `App.tsx`.
+- **Folders:** `src/pages/`, `src/components/layout/`, `src/components/shared/` (and placeholders for `services/`, `types/`). Skeleton is the base for Sprint 2 (real Navbar/Footer) and later sprints.
 
 ---
 
@@ -28,6 +39,13 @@ Log of changes and progress for teammates and stakeholders. Intended to be commi
 
 - **Spring 2026 Logs** and all frontend docs moved inside `frontend-react/`. Only `frontend-react/` (including its docs and logs) is committed and pushed; nothing outside that folder is in scope for the frontend team.
 - **docs-local/** at repo root is for personal notes and Cursor agent use only; it is not pushed.
+
+### First push to origin
+
+- **frontend-react pushed to `dev`.** Initial commit (`frontend: add React app with routing and Spring 2026 Logs`) added the full React app: Vite + React 18 + TypeScript, React Router with all page routes (Landing, Login, Register, Dashboard, Match, Institutions, Programs, About), AppLayout placeholder, and Spring 2026 Logs (page-mappings.md, current-progress.md).
+- **Push scope confirmed.** Only `frontend-react/` is committed and pushed. Architecture, sprint plan, legacy mapping, and team-collaboration docs live in `docs-local/` (not pushed); only Spring 2026 Logs are pushed with the app.
+
+*— Frontend lead (lucamacie9), 2026-02-15*
 
 ---
 
