@@ -89,7 +89,7 @@ function LandingPage() {
         </div>
       </section>
     </div>
-  );
+  )
 }
 
 export default LandingPage
