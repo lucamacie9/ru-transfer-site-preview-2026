@@ -43,11 +43,13 @@ For an empty GitHub repo, the first push often maps local `dev` to the remote de
 git push -u selfhosted dev:main
 ```
 
-Later updates:
+**Tip:** If your local `dev` should keep tracking `origin/dev` (class repo), after that first push prefer updates **without** `-u`:
 
 ```bash
 git push selfhosted dev:main
 ```
+
+Using `-u` again can point `dev` at `selfhosted/main` instead of `origin/dev`; fix with `git branch --set-upstream-to=origin/dev dev` if needed.
 
 If you prefer to keep a branch named `dev` on the mirror as well:
 
