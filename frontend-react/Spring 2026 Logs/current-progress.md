@@ -7,6 +7,15 @@ Log of changes and progress for teammates. Intended to be committed and pushed w
 ---
 ## 2026-03-09
 
+### Institutions Page Update (Contributor Note)
+- **Institutions page implementation credited to team member Yinka Yussuf.**
+- Added the institution/program selector experience on `/institutions`, including:
+  - Current institution selection
+  - Target institution selection
+  - Target program filtering based on selected target institution
+  - Confirm action and summary display
+- Integration behavior uses backend endpoints for institutions and programs.
+
 ### Login & Registration Pages + Validation
 **Login Page**
 - Implemented login form with email and password inputs

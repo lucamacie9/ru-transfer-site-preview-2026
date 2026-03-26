@@ -22,47 +22,31 @@ function formatInstitutionLabel(inst?: Institution) {
 
 function InstitutionsPage() {
   const [institutions, setInstitutions] = useState<Institution[]>([])
-  const [programs, setPrograms] = useState<Program[]>([])
+  const [allPrograms, setAllPrograms] = useState<Program[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
 
-  const [currentInstitutionId, setCurrentInstitutionId] = useState<string>('')
-  const [targetInstitutionId, setTargetInstitutionId] = useState<string>('')
-  const [targetProgramValue, setTargetProgramValue] = useState<string>('')
+  const [currentInstitutionId, setCurrentInstitutionId] = useState('')
+  const [targetInstitutionId, setTargetInstitutionId] = useState('')
+  const [targetProgramValue, setTargetProgramValue] = useState('')
+  const [selectionSummary, setSelectionSummary] = useState(
+    'Select your current and target institutions, then a target program.',
+  )
 
   const institutionsById = useMemo(() => {
     const map: Record<string, Institution> = {}
-    institutions.forEach((i) => {
-      map[String(i.institutionId)] = i
+    institutions.forEach((inst) => {
+      map[String(inst.institutionId)] = inst
     })
     return map
   }, [institutions])
 
   const targetPrograms = useMemo(() => {
     if (!targetInstitutionId) return []
-    return programs.filter(
+    return allPrograms.filter(
       (p) => String(p.institutionId) === String(targetInstitutionId),
     )
-  }, [programs, targetInstitutionId])
-
-  const summary = useMemo(() => {
-    if (!currentInstitutionId || !targetInstitutionId || !targetProgramValue) return ''
-    const currentInst = institutionsById[String(currentInstitutionId)]
-    const targetInst = institutionsById[String(targetInstitutionId)]
-    const targetProgram = programs.find(
-      (p) =>
-        String(p.institutionId) === String(targetInstitutionId) &&
-        String(p.id ?? p.programId ?? p.programName) === String(targetProgramValue),
-    )
-
-    const currentLabel =
-      currentInst ? formatInstitutionLabel(currentInst) : `Institution ${currentInstitutionId}`
-    const targetLabel =
-      targetInst ? formatInstitutionLabel(targetInst) : `Institution ${targetInstitutionId}`
-    const programLabel = targetProgram ? targetProgram.programName : `Program ${targetProgramValue}`
-
-    return `Current: ${currentLabel} → Target: ${targetLabel} | Target Program: ${programLabel}`
-  }, [currentInstitutionId, targetInstitutionId, targetProgramValue, institutionsById, programs])
+  }, [allPrograms, targetInstitutionId])
 
   useEffect(() => {
     let cancelled = false
@@ -73,16 +57,19 @@ function InstitutionsPage() {
       fetch(`${BASE_API_URL}/institutions`).then((r) => r.json()),
       fetch(`${BASE_API_URL}/programs`).then((r) => r.json()),
     ])
-      .then(([insts, progs]) => {
+      .then(([loadedInstitutions, loadedPrograms]) => {
         if (cancelled) return
-        setInstitutions((insts ?? []) as Institution[])
-        setPrograms((progs ?? []) as Program[])
+        setInstitutions((loadedInstitutions ?? []) as Institution[])
+        setAllPrograms((loadedPrograms ?? []) as Program[])
+        setSelectionSummary('Select your current and target institutions, then a target program.')
       })
-      .catch((e) => {
+      .catch((err) => {
         if (cancelled) return
-        setError(String(e))
+        const msg = `Error loading institutions/programs: ${String(err)}`
+        setError(msg)
+        setSelectionSummary(msg)
         setInstitutions([])
-        setPrograms([])
+        setAllPrograms([])
       })
       .finally(() => {
         if (cancelled) return
@@ -96,12 +83,52 @@ function InstitutionsPage() {
 
   useEffect(() => {
     setTargetProgramValue('')
-  }, [targetInstitutionId])
+    if (!targetInstitutionId) {
+      setSelectionSummary('Select a target institution to see available programs.')
+      return
+    }
+    if (targetPrograms.length === 0) {
+      setSelectionSummary('No programs for this institution.')
+      return
+    }
+    setSelectionSummary('')
+  }, [targetInstitutionId, targetPrograms.length])
 
   const canConfirm = Boolean(currentInstitutionId && targetInstitutionId && targetProgramValue)
 
+  function handleConfirmSelection() {
+    if (!canConfirm) {
+      setSelectionSummary(
+        'Please select current institution, target institution, and a target program.',
+      )
+      return
+    }
+
+    const currentInst = institutionsById[String(currentInstitutionId)]
+    const targetInst = institutionsById[String(targetInstitutionId)]
+    const targetProgram = allPrograms.find(
+      (p) =>
+        String(p.institutionId) === String(targetInstitutionId) &&
+        String(p.id ?? p.programId ?? p.programName) === String(targetProgramValue),
+    )
+
+    const currentLabel = currentInst
+      ? formatInstitutionLabel(currentInst)
+      : `Institution ${currentInstitutionId}`
+    const targetLabel = targetInst
+      ? formatInstitutionLabel(targetInst)
+      : `Institution ${targetInstitutionId}`
+    const targetProgramLabel = targetProgram
+      ? targetProgram.programName
+      : `Program ${targetProgramValue}`
+
+    setSelectionSummary(
+      `Current: ${currentLabel} → Target: ${targetLabel} | Target Program: ${targetProgramLabel}`,
+    )
+  }
+
   return (
-    <div style={{ background: '#F8F9FA', paddingTop: 24 }}>
+    <div style={{ background: '#F8F9FA', paddingTop: 60 }}>
       <div
         style={{
           position: 'relative',
@@ -114,17 +141,19 @@ function InstitutionsPage() {
           textAlign: 'center',
           overflow: 'hidden',
           color: 'white',
-          marginBottom: 32,
         }}
       >
-        <div style={{ position: 'absolute', inset: 0, zIndex: 0 }} />
+        <div style={{ width: '100%', height: '100%', zIndex: 0 }} />
         <div
           style={{
-            position: 'relative',
-            zIndex: 1,
+            position: 'absolute',
+            top: '50%',
+            left: '50%',
+            transform: 'translate(-50%, -50%)',
             fontFamily: 'Merriweather, serif',
             fontSize: 48,
             fontWeight: 700,
+            zIndex: 1,
             textShadow: '2px 2px 4px rgba(0,0,0,0.5)',
             padding: '0 1rem',
           }}
@@ -133,7 +162,7 @@ function InstitutionsPage() {
         </div>
       </div>
 
-      <div style={{ maxWidth: 980, margin: '0 auto', padding: '0 1rem 3rem' }}>
+      <div style={{ maxWidth: 1080, margin: '3rem auto', padding: '0 1rem' }}>
         <div
           style={{
             backgroundColor: '#ffffff',
@@ -142,17 +171,11 @@ function InstitutionsPage() {
             boxShadow: '0 4px 8px rgba(0,0,0,0.08)',
           }}
         >
-          <h3 style={{ marginTop: 0, marginBottom: 12 }}>Plan Your Transfer Path</h3>
-          <p style={{ color: '#6c757d', marginTop: 0, marginBottom: 18 }}>
+          <h3 style={{ margin: '0 0 0.75rem' }}>Plan Your Transfer Path</h3>
+          <p style={{ color: '#6c757d', margin: '0 0 1.5rem' }}>
             Choose your <strong>current institution</strong>, your <strong>target institution</strong>, and the{' '}
             <strong>target program</strong> you want to transfer into.
           </p>
-
-          {error ? (
-            <div style={{ color: '#b42318', marginBottom: 16 }}>
-              Error loading institutions/programs: {error}
-            </div>
-          ) : null}
 
           <div
             style={{
@@ -163,25 +186,23 @@ function InstitutionsPage() {
             }}
           >
             <div>
-              <h5 style={{ margin: '0 0 8px' }}>Current Institution</h5>
-              <label style={{ display: 'block', fontSize: 14, marginBottom: 6 }}>
+              <h5 style={{ margin: '0 0 0.5rem' }}>Current Institution</h5>
+              <label htmlFor="currentInstitutionSelect" style={{ display: 'block', marginBottom: 6 }}>
                 Current Institution
               </label>
               <select
+                id="currentInstitutionSelect"
                 value={currentInstitutionId}
                 onChange={(e) => setCurrentInstitutionId(e.target.value)}
                 disabled={loading || Boolean(error)}
-                style={{
-                  width: '100%',
-                  height: 40,
-                  borderRadius: 8,
-                  border: '1px solid #cfcfcf',
-                  padding: '0 12px',
-                  background: '#fff',
-                }}
+                style={{ width: '100%', minHeight: 40, borderRadius: 6, border: '1px solid #ced4da' }}
               >
                 <option value="">
-                  {loading ? 'Loading institutions...' : 'Select Institution'}
+                  {loading
+                    ? 'Loading institutions...'
+                    : error
+                      ? 'Unable to load institutions'
+                      : 'Select Institution'}
                 </option>
                 {institutions.map((inst) => (
                   <option key={String(inst.institutionId)} value={String(inst.institutionId)}>
@@ -192,25 +213,23 @@ function InstitutionsPage() {
             </div>
 
             <div>
-              <h5 style={{ margin: '0 0 8px' }}>Target Institution</h5>
-              <label style={{ display: 'block', fontSize: 14, marginBottom: 6 }}>
+              <h5 style={{ margin: '0 0 0.5rem' }}>Target Institution</h5>
+              <label htmlFor="targetInstitutionSelect" style={{ display: 'block', marginBottom: 6 }}>
                 Target Institution
               </label>
               <select
+                id="targetInstitutionSelect"
                 value={targetInstitutionId}
                 onChange={(e) => setTargetInstitutionId(e.target.value)}
                 disabled={loading || Boolean(error)}
-                style={{
-                  width: '100%',
-                  height: 40,
-                  borderRadius: 8,
-                  border: '1px solid #cfcfcf',
-                  padding: '0 12px',
-                  background: '#fff',
-                }}
+                style={{ width: '100%', minHeight: 40, borderRadius: 6, border: '1px solid #ced4da' }}
               >
                 <option value="">
-                  {loading ? 'Loading institutions...' : 'Select Institution'}
+                  {loading
+                    ? 'Loading institutions...'
+                    : error
+                      ? 'Unable to load institutions'
+                      : 'Select Institution'}
                 </option>
                 {institutions.map((inst) => (
                   <option key={String(inst.institutionId)} value={String(inst.institutionId)}>
@@ -230,22 +249,18 @@ function InstitutionsPage() {
             }}
           >
             <div>
-              <h5 style={{ margin: '0 0 8px' }}>Target Program</h5>
-              <label style={{ display: 'block', fontSize: 14, marginBottom: 6 }}>
+              <h5 style={{ margin: '0 0 0.5rem' }}>Target Program</h5>
+              <label htmlFor="targetProgramSelect" style={{ display: 'block', marginBottom: 6 }}>
                 Program at Target Institution
               </label>
               <select
+                id="targetProgramSelect"
                 value={targetProgramValue}
                 onChange={(e) => setTargetProgramValue(e.target.value)}
-                disabled={!targetInstitutionId || loading || Boolean(error) || targetPrograms.length === 0}
-                style={{
-                  width: '100%',
-                  height: 40,
-                  borderRadius: 8,
-                  border: '1px solid #cfcfcf',
-                  padding: '0 12px',
-                  background: '#fff',
-                }}
+                disabled={
+                  loading || Boolean(error) || !targetInstitutionId || targetPrograms.length === 0
+                }
+                style={{ width: '100%', minHeight: 40, borderRadius: 6, border: '1px solid #ced4da' }}
               >
                 {!targetInstitutionId ? (
                   <option value="">Select a target institution first</option>
@@ -280,37 +295,26 @@ function InstitutionsPage() {
           >
             <button
               type="button"
+              onClick={handleConfirmSelection}
               disabled={!canConfirm}
-              onClick={() => {
-                if (!canConfirm) return
-                // Summary already updates via state; click is kept as a future integration hook.
-              }}
               style={{
-                height: 40,
+                minHeight: 40,
                 padding: '0 16px',
-                borderRadius: 8,
+                borderRadius: 6,
                 border: 'none',
                 backgroundColor: canConfirm ? '#0d6efd' : '#9ec5fe',
                 color: '#fff',
-                fontWeight: 600,
                 cursor: canConfirm ? 'pointer' : 'not-allowed',
               }}
             >
               Confirm Transfer Goal
             </button>
-
-            <div style={{ color: error ? '#b42318' : '#6c757d', fontSize: 12 }}>
-              {error
-                ? `Error loading institutions/programs: ${error}`
-                : summary || 'Select your current and target institutions, then a target program.'}
+            <div style={{ color: error ? '#dc3545' : '#6c757d', fontSize: 12 }}>
+              {error ?? selectionSummary}
             </div>
           </div>
         </div>
       </div>
-
-      <footer style={{ background: '#178581', color: '#fff', textAlign: 'center', padding: '6px 12px' }}>
-        <p style={{ margin: 0 }}>© 2025 Transfer Credit Match. All Rights Reserved.</p>
-      </footer>
     </div>
   )
 }
