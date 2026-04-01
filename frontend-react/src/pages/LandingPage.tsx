@@ -17,20 +17,15 @@ function LandingPage() {
           }}
         >
           <div
-            style={{
-              height: 160,
-              border: '2px dashed #99b',
-              borderRadius: '8px',
-              marginBottom: '1.5rem',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              color: '#556',
-              fontSize: '0.95rem',
-            }}
-          >
-            Hero image / header banner
-          </div>
+  style={{
+    height: 160,
+    backgroundImage: "url('/ru-banner.jpg')",
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+    borderRadius: '8px',
+    marginBottom: '1.5rem',
+  }}
+/>
           <h1 style={{ marginBottom: '0.5rem' }}>Transfer Credit Match</h1>
           <p style={{ margin: 0, color: '#555' }}>
             Short tagline describing what this page is about.
