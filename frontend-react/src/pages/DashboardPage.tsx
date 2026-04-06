@@ -102,7 +102,7 @@ function DashboardPage() {
               padding: '1rem',
             }}
           >
-            <p style={{ margin: 0, color: '#4f7a57', fontSize: '0.9rem' }}>{card.label}</p>
+            <p style={{ margin: 0, color: '#000', fontSize: '0.9rem' }}>{card.label}</p>
             <p style={{ margin: '0.25rem 0 0 0', fontSize: '1.5rem', fontWeight: 700, color: '#1f4d2e' }}>
               {card.value}
             </p>
@@ -111,7 +111,7 @@ function DashboardPage() {
       </section>
 
       <header style={{ textAlign: 'center' }}>
-        <h2 style={{ fontSize: '1.5rem', fontWeight: 700, marginBottom: '0.5rem', color: '#1f4d2e' }}>
+        <h2 style={{ fontSize: '1.5rem', fontWeight: 700, marginBottom: '0.5rem', color: '#000' }}>
           Program Director Dashboard
         </h2>
         <p style={{ color: '#355e3b', margin: 0 }}>
@@ -133,7 +133,7 @@ function DashboardPage() {
             gap: '1rem',
           }}
         >
-          <h2 style={{ fontSize: '1.2rem', marginBottom: '0.75rem', color: '#1f4d2e' }}>{section}</h2>
+          <h2 style={{ fontSize: '1.2rem', marginBottom: '0.75rem', color: '#000' }}>{section}</h2>
 
           <div style={{ display: 'flex', gap: '0.5rem' }}>
             <input
@@ -218,7 +218,7 @@ function DashboardPage() {
             padding: '1rem',
           }}
         >
-          <h2 style={{ marginTop: 0, color: '#1f4d2e' }}>Management Shortcuts</h2>
+          <h2 style={{ marginTop: 0, color: '#000' }}>Management Shortcuts</h2>
           <ul style={{ margin: 0, paddingLeft: '1.1rem', color: '#355e3b', lineHeight: 1.8 }}>
             <li>Review institution profiles</li>
             <li>Maintain program equivalencies</li>
@@ -235,7 +235,7 @@ function DashboardPage() {
             padding: '1rem',
           }}
         >
-          <h2 style={{ marginTop: 0, color: '#1f4d2e' }}>Recent Updates</h2>
+          <h2 style={{ marginTop: 0, color: '#000' }}>Recent Updates</h2>
           <ul style={{ margin: 0, paddingLeft: '1.1rem', color: '#355e3b', lineHeight: 1.6 }}>
             {recentUpdates.map((update) => (
               <li key={update}>{update}</li>
