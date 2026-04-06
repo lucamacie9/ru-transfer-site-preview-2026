@@ -134,7 +134,64 @@ INSERT INTO courses (institution_id, program_id, course_name, course_code, credi
 
 ((SELECT institution_id FROM institutions WHERE name = 'City Colleges of Chicago'),
  (SELECT program_id FROM programs WHERE program_name = 'Computer Systems Technology' AND institution_id = (SELECT institution_id FROM institutions WHERE name = 'City Colleges of Chicago')),
- 'Database Concepts', 'CCC-CST-203', 3);
+ 'Database Concepts', 'CCC-CST-203', 3),
+	
+((SELECT institution_id FROM institutions WHERE name = 'National Louis University'), 
+ (SELECT program_id FROM programs WHERE program_name = 'Computer Science' AND institution_id = (SELECT institution_id FROM institutions WHERE name = 'National Louis University')), 
+ 'Computational Thinking and Technical Writing', 'CSS100', 3), 
+
+((SELECT institution_id FROM institutions WHERE name = 'National Louis University'), 
+ (SELECT program_id FROM programs WHERE program_name = 'Computer Science' AND institution_id = (SELECT institution_id FROM institutions WHERE name = 'National Louis University')), 
+ 'Open-Source Data and Software', 'CSS101', 3), 
+
+((SELECT institution_id FROM institutions WHERE name = 'National Louis University'), 
+ (SELECT program_id FROM programs WHERE program_name = 'Computer Science' AND institution_id = (SELECT institution_id FROM institutions WHERE name = 'National Louis University')), 
+ 'Introduction to Information Systems', 'CSS200', 3), 
+
+((SELECT institution_id FROM institutions WHERE name = 'National Louis University'), 
+ (SELECT program_id FROM programs WHERE program_name = 'Computer Science' AND institution_id = (SELECT institution_id FROM institutions WHERE name = 'National Louis University')), 
+ 'Operating Systems', 'CSS205', 3), 
+
+((SELECT institution_id FROM institutions WHERE name = 'National Louis University'), 
+ (SELECT program_id FROM programs WHERE program_name = 'Computer Science' AND institution_id = (SELECT institution_id FROM institutions WHERE name = 'National Louis University')), 
+ 'Introduction to Networking', 'CSS210', 3), 
+
+((SELECT institution_id FROM institutions WHERE name = 'National Louis University'), 
+ (SELECT program_id FROM programs WHERE program_name = 'Computer Science' AND institution_id = (SELECT institution_id FROM institutions WHERE name = 'National Louis University')), 
+ 'Introduction to Applied Programming', 'CSS225', 3), 
+
+	
+((SELECT institution_id FROM institutions WHERE name = 'National Louis University'), 
+ (SELECT program_id FROM programs WHERE program_name = 'Computer Science' AND institution_id = (SELECT institution_id FROM institutions WHERE name = 'National Louis University')), 
+ 'Applied Object-Oriented Programming', 'CSS301', 3), 
+	
+((SELECT institution_id FROM institutions WHERE name = 'National Louis University'), 
+ (SELECT program_id FROM programs WHERE program_name = 'Computer Science' AND institution_id = (SELECT institution_id FROM institutions WHERE name = 'National Louis University')), 
+ 'User Interface Development', 'CSS303', 3), 
+	
+((SELECT institution_id FROM institutions WHERE name = 'National Louis University'), 
+ (SELECT program_id FROM programs WHERE program_name = 'Computer Science' AND institution_id = (SELECT institution_id FROM institutions WHERE name = 'National Louis University')), 
+ 'Application Design and Development', 'CSS304', 3), 
+
+((SELECT institution_id FROM institutions WHERE name = 'National Louis University'), 
+ (SELECT program_id FROM programs WHERE program_name = 'Computer Science' AND institution_id = (SELECT institution_id FROM institutions WHERE name = 'National Louis University')), 
+ 'Systems Analysis', 'CSS315', 3), 
+
+((SELECT institution_id FROM institutions WHERE name = 'National Louis University'), 
+ (SELECT program_id FROM programs WHERE program_name = 'Computer Science' AND institution_id = (SELECT institution_id FROM institutions WHERE name = 'National Louis University')), 
+ 'Discrete Structures', 'CSS320', 3), 
+	
+((SELECT institution_id FROM institutions WHERE name = 'National Louis University'), 
+ (SELECT program_id FROM programs WHERE program_name = 'Computer Science' AND institution_id = (SELECT institution_id FROM institutions WHERE name = 'National Louis University')), 
+ 'Mobile App Development', 'CSS403', 3), 
+
+((SELECT institution_id FROM institutions WHERE name = 'National Louis University'), 
+ (SELECT program_id FROM programs WHERE program_name = 'Computer Science' AND institution_id = (SELECT institution_id FROM institutions WHERE name = 'National Louis University')), 
+ 'Back End Web Development', 'CSS404', 3), 
+	
+((SELECT institution_id FROM institutions WHERE name = 'National Louis University'), 
+ (SELECT program_id FROM programs WHERE program_name = 'Computer Science' AND institution_id = (SELECT institution_id FROM institutions WHERE name = 'National Louis University')), 
+ 'Cutting Edge AI', 'CSS450', 3);
 
 -- Insert knowledge units
 INSERT INTO knowledge_units (ku_name, ku_description) VALUES 
@@ -214,7 +271,19 @@ INSERT INTO course_ku (course_id, ku_id) VALUES
 ((SELECT course_id FROM courses WHERE course_code = 'CCC-CST-202'), (SELECT ku_id FROM knowledge_units WHERE ku_name = 'Operating Systems Concepts')),
 ((SELECT course_id FROM courses WHERE course_code = 'CCC-CST-202'), (SELECT ku_id FROM knowledge_units WHERE ku_name = 'Operating Systems Theory')),
 ((SELECT course_id FROM courses WHERE course_code = 'CCC-CST-203'), (SELECT ku_id FROM knowledge_units WHERE ku_name = 'Database Management')),
-((SELECT course_id FROM courses WHERE course_code = 'CCC-CST-203'), (SELECT ku_id FROM knowledge_units WHERE ku_name = 'Database Management Systems'));
+((SELECT course_id FROM courses WHERE course_code = 'CCC-CST-203'), (SELECT ku_id FROM knowledge_units WHERE ku_name = 'Database Management Systems'))
+((SELECT course_id FROM courses WHERE course_code='CSS100'), (SELECT ku_id FROM knowledge_units WHERE ku_name='Basic Scripting and Programming')),  
+((SELECT course_id FROM courses WHERE course_code='CSS101'), (SELECT ku_id FROM knowledge_units WHERE ku_name=' IT Systems Components')),  
+((SELECT course_id FROM courses WHERE course_code='CSS200'), (SELECT ku_id FROM knowledge_units WHERE ku_name=' IT Systems Components')),  
+((SELECT course_id FROM courses WHERE course_code='CSS205'), (SELECT ku_id FROM knowledge_units WHERE ku_name=' Operating Systems Concepts ')),  
+((SELECT course_id FROM courses WHERE course_code='CSS205'), (SELECT ku_id FROM knowledge_units WHERE ku_name=' Operating Systems Administration ')),  
+((SELECT course_id FROM courses WHERE course_code='CSS210'), (SELECT ku_id FROM knowledge_units WHERE ku_name=' Basic Networking ')),  
+((SELECT course_id FROM courses WHERE course_code='CSS210'), (SELECT ku_id FROM knowledge_units WHERE ku_name=' Network Defense')),  
+((SELECT course_id FROM courses WHERE course_code='CSS225'), (SELECT ku_id FROM knowledge_units WHERE ku_name='Basic Scripting and Programming')), 
+((SELECT course_id FROM courses WHERE course_code='CSS301'), (SELECT ku_id FROM knowledge_units WHERE ku_name='Basic Scripting and Programming')),  
+((SELECT course_id FROM courses WHERE course_code='CSS304'), (SELECT ku_id FROM knowledge_units WHERE ku_name='Basic Scripting and Programming')),  
+((SELECT course_id FROM courses WHERE course_code='CSS403'), (SELECT ku_id FROM knowledge_units WHERE ku_name='Basic Scripting and Programming')),  
+((SELECT course_id FROM courses WHERE course_code='CSS404'), (SELECT ku_id FROM knowledge_units WHERE ku_name='Basic Scripting and Programming'));
 
 -- Insert students
 INSERT INTO students (user_id, institution_id, program_id) VALUES 
