@@ -1,4 +1,6 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useRoleView } from '../context/RoleViewContext';
 
 const statCards = [
   { label: 'Institutions', value: 12 },
@@ -25,6 +27,8 @@ const recentUpdates = [
 ];
 
 function DashboardPage() {
+  const navigate = useNavigate();
+  const { role, setRole } = useRoleView();
   const [data, setData] = useState<DataState>({
     Institutions: [{ name: 'University A' }, { name: 'College B' }],
     Programs: [{ name: 'Cybersecurity' }, { name: 'IT Networking' }],
@@ -83,6 +87,61 @@ function DashboardPage() {
         <p style={{ margin: '0.5rem 0 0 0', color: '#355e3b' }}>
           Overview of transfer credit activity and quick access to management areas.
         </p>
+      </section>
+
+      <section
+        style={{
+          border: '1px solid #dfe7e2',
+          borderRadius: 12,
+          backgroundColor: '#fff',
+          padding: '0.9rem 1rem',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          gap: '0.75rem',
+          flexWrap: 'wrap',
+        }}
+      >
+        <p style={{ margin: 0, color: '#355e3b', fontWeight: 600 }}>
+          Current role view: {role === 'admin' ? 'Admin (Director)' : 'Student'}
+        </p>
+        <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
+          <button
+            type="button"
+            onClick={() => setRole('admin')}
+            style={{
+              height: 36,
+              padding: '0 0.9rem',
+              borderRadius: '8px',
+              border: role === 'admin' ? 'none' : '1px solid #cad8cf',
+              backgroundColor: role === 'admin' ? '#2f7e41' : '#fff',
+              color: role === 'admin' ? '#fff' : '#374151',
+              fontWeight: 700,
+              cursor: 'pointer',
+            }}
+          >
+            View as Admin
+          </button>
+          <button
+            type="button"
+            onClick={() => {
+              setRole('student');
+              navigate('/');
+            }}
+            style={{
+              height: 36,
+              padding: '0 0.9rem',
+              borderRadius: '8px',
+              border: '1px solid #cad8cf',
+              backgroundColor: '#fff',
+              color: '#374151',
+              fontWeight: 700,
+              cursor: 'pointer',
+            }}
+          >
+            View as Student
+          </button>
+        </div>
       </section>
 
       <section

@@ -1,7 +1,13 @@
 // src/components/layout/AppLayout.tsx
 import { Outlet, Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import { useRoleView } from '../../context/RoleViewContext';
 
 function AppLayout() {
+  const navigate = useNavigate();
+  const { role, isLoggedIn, setRole } = useRoleView();
+  const canAccessDirectorView = isLoggedIn && role === 'admin';
+
   const linkStyle: React.CSSProperties = {
     color: '#fff',
     textDecoration: 'none',
@@ -33,9 +39,11 @@ function AppLayout() {
           <Link to="/match" style={linkStyle}>
             Match
           </Link>
-          <Link to="/dashboard" style={linkStyle}>
-            Director View
-          </Link>
+          {canAccessDirectorView && (
+            <Link to="/dashboard" style={linkStyle}>
+              Director View
+            </Link>
+          )}
           <Link to="/institutions" style={linkStyle}>
             Institutions
           </Link>
@@ -53,6 +61,41 @@ function AppLayout() {
           </Link>
         </div>
       </nav>
+      {isLoggedIn && role === 'student' && (
+        <div
+          style={{
+            backgroundColor: '#2f7e41',
+            color: '#fff',
+            padding: '0.55rem 1.5rem',
+            fontWeight: 700,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            gap: '12px',
+            flexWrap: 'wrap',
+          }}
+        >
+          <span>Viewing as Student</span>
+          <button
+            type="button"
+            onClick={() => {
+              setRole('admin');
+              navigate('/dashboard');
+            }}
+            style={{
+              border: '1px solid rgba(255, 255, 255, 0.8)',
+              borderRadius: '8px',
+              backgroundColor: 'transparent',
+              color: '#fff',
+              padding: '0.3rem 0.7rem',
+              fontWeight: 700,
+              cursor: 'pointer',
+            }}
+          >
+            Switch to Admin
+          </button>
+        </div>
+      )}
 
       {/* Main Content Area (Pages will render here) */}
       <main style={{ flex: 1, padding: '2rem' }}>

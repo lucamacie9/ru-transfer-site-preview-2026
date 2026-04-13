@@ -1,5 +1,6 @@
 import { FormEvent, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useRoleView } from '../context/RoleViewContext';
 
 type LoginFormData = {
   email: string;
@@ -12,6 +13,8 @@ type LoginFormErrors = {
 };
 
 function LoginPage() {
+  const navigate = useNavigate();
+  const { setIsLoggedIn, setRole } = useRoleView();
   const [formData, setFormData] = useState<LoginFormData>({
     email: '',
     password: '',
@@ -58,6 +61,9 @@ const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
   if (Object.keys(validationErrors).length === 0) {
     setLoginError('');
     console.log('Login form submitted:', formData);
+    setIsLoggedIn(true);
+    setRole('admin');
+    navigate('/dashboard');
   }
 };
   return (
