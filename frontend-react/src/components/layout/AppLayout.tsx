@@ -81,7 +81,7 @@ function AppLayout() {
               transition: 'all 0.25s ease',
             }}
           >
-            {theme === 'light' ? '🌙' : '☀️'}
+            {theme === 'light' ? '☀️' : '🌙'}
           </button>
 
           <Link to="/login" style={linkStyle}>
