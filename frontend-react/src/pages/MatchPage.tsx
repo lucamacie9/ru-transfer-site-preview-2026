@@ -234,6 +234,8 @@ function MatchPage() {
   const [showAlternativeCourses, setShowAlternativeCourses] = useState(false);
   const [savedMessage, setSavedMessage] = useState("");
   const [savedTransferPlans, setSavedTransferPlans] = useState<SavedPlan[]>([]);
+  const [transcriptFile, setTranscriptFile] = useState<File | null>(null);
+  const [transcriptMessage, setTranscriptMessage] = useState("");
 
   const currentProgramData = programCourseData[program];
 
@@ -382,6 +384,14 @@ function MatchPage() {
 
   const handleRemovePlan = (id: number) => {
     setSavedTransferPlans((prev) => prev.filter((plan) => plan.id !== id));
+  };
+
+  const handleTranscriptUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      setTranscriptFile(file);
+      setTranscriptMessage(`Transcript uploaded: ${file.name}`);
+    }
   };
 
   const getResultStyle = (): CSSProperties => {
@@ -678,6 +688,29 @@ function MatchPage() {
         </div>
 
         {savedMessage && <p style={savedMessageStyle}>{savedMessage}</p>}
+      </div>
+
+      <div style={sectionCardStyle}>
+        <h3 style={sectionTitleStyle}>Upload Transcript</h3>
+        <p style={{ ...summaryTextStyle, marginTop: 0 }}>
+          Upload your transcript to build your transfer plan easier 
+        </p>
+        <div style={{ marginBottom: "16px" }}>
+          <input
+            type="file"
+            accept=".pdf,.doc,.docx,.txt"
+            onChange={handleTranscriptUpload}
+            style={fileInputStyle}
+          />
+        </div>
+        {transcriptFile && (
+          <div style={{ ...resultBoxStyle, marginBottom: "16px", backgroundColor: "#edfdf4", border: "1px solid #b7ebc6", color: "#166534" }}>
+            ✓ {transcriptFile.name} selected
+          </div>
+        )}
+        {transcriptMessage && (
+          <p style={{ ...savedMessageStyle, color: "#166534" }}>{transcriptMessage}</p>
+        )}
       </div>
 
       <div style={sectionCardStyle}>
@@ -1096,6 +1129,17 @@ const plansListStyle: CSSProperties = {
   display: "flex",
   flexDirection: "column",
   gap: "14px",
+};
+
+const fileInputStyle: CSSProperties = {
+  width: "100%",
+  padding: "12px 14px",
+  borderRadius: "12px",
+  border: "1px solid #cad8cf",
+  backgroundColor: "#fff",
+  outline: "none",
+  boxSizing: "border-box",
+  cursor: "pointer",
 };
 
 const planCardStyle: CSSProperties = {
