@@ -1,18 +1,14 @@
 import React, { useEffect, useMemo, useState } from "react";
-import { useLocation } from "react-router-dom";
-import { apiService, Course, Institution, Program, MatchRequest } from '../services/api';
+import { apiService, Course, Institution, MatchRequest } from '../services/api';
 
 function MatchPageReal() {
-  const location = useLocation();
 
   const [institutions, setInstitutions] = useState<Institution[]>([]);
-  const [programs, setPrograms] = useState<Program[]>([]);
   const [courses, setCourses] = useState<Course[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
   const [selectedInstitution, setSelectedInstitution] = useState<number | null>(null);
-  const [selectedProgram, setSelectedProgram] = useState<number | null>(null);
   const [fromSearch, setFromSearch] = useState("");
   const [toSearch, setToSearch] = useState("");
   const [selectedFromCourses, setSelectedFromCourses] = useState<number[]>([]);
@@ -27,14 +23,12 @@ function MatchPageReal() {
     const fetchData = async () => {
       try {
         setLoading(true);
-        const [institutionsData, programsData, coursesData] = await Promise.all([
+        const [institutionsData, coursesData] = await Promise.all([
           apiService.getInstitutions(),
-          apiService.getPrograms(),
           apiService.getCourses()
         ]);
         
         setInstitutions(institutionsData);
-        setPrograms(programsData);
         setCourses(coursesData);
       } catch (err) {
         console.error('Failed to fetch data:', err);
@@ -46,12 +40,6 @@ function MatchPageReal() {
 
     fetchData();
   }, []);
-
-  // Filter programs by selected institution
-  const filteredPrograms = useMemo(() => {
-    if (!selectedInstitution) return programs;
-    return programs.filter(program => program.institutionId === selectedInstitution);
-  }, [programs, selectedInstitution]);
 
   // Filter courses for transfer institutions (not Roosevelt)
   const transferInstitutions = institutions.filter(inst => !inst.name.toLowerCase().includes('roosevelt'));
@@ -461,7 +449,7 @@ const summaryCardStyle = {
   boxShadow: "0 8px 24px rgba(16, 24, 40, 0.04)",
 };
 
-const programRowStyle = {
+const programRowStyle: React.CSSProperties = {
   display: "flex",
   gap: "12px",
   alignItems: "center",
@@ -519,7 +507,7 @@ const panelHeadingStyle = {
   color: "#1f2937",
 };
 
-const inputStyle = {
+const inputStyle: React.CSSProperties = {
   width: "100%",
   padding: "12px 14px",
   borderRadius: "12px",
@@ -530,7 +518,7 @@ const inputStyle = {
   boxSizing: "border-box",
 };
 
-const selectStyle = {
+const selectStyle: React.CSSProperties = {
   width: "100%",
   padding: "12px 14px",
   borderRadius: "12px",
@@ -540,7 +528,7 @@ const selectStyle = {
   boxSizing: "border-box",
 };
 
-const checkboxListStyle = {
+const checkboxListStyle: React.CSSProperties = {
   display: "flex",
   flexDirection: "column",
   gap: "10px",
@@ -573,7 +561,7 @@ const summaryTextStyle = {
   lineHeight: "1.6",
 };
 
-const buttonRowStyle = {
+const buttonRowStyle: React.CSSProperties = {
   display: "flex",
   gap: "12px",
   flexWrap: "wrap",
@@ -647,7 +635,7 @@ const detailsGridStyle = {
   marginTop: "12px",
 };
 
-const detailColumnStyle = {
+const detailColumnStyle: React.CSSProperties = {
   display: "flex",
   flexDirection: "column",
   gap: "12px",
@@ -684,13 +672,13 @@ const emptyTextStyle = {
   margin: 0,
 };
 
-const plansListStyle = {
+const plansListStyle: React.CSSProperties = {
   display: "flex",
   flexDirection: "column",
   gap: "14px",
 };
 
-const planCardStyle = {
+const planCardStyle: React.CSSProperties = {
   border: "1px solid #e3ebe5",
   backgroundColor: "#f9fcfa",
   borderRadius: "16px",

@@ -57,9 +57,14 @@ export interface MatchRequest {
   courseIdTo: number
 }
 
+// Custom request options that extends RequestInit with our custom properties
+interface RequestOptions extends RequestInit {
+  requiresAuth?: boolean
+}
+
 // API service class
 class ApiService {
-  private async request<T>(endpoint: string, options: RequestInit = {}): Promise<T> {
+  private async request<T>(endpoint: string, options: RequestOptions = {}): Promise<T> {
     const url = `${API_BASE_URL}${endpoint}`
     const config = {
       headers: {
