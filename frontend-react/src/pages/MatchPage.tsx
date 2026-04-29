@@ -872,9 +872,10 @@ function MatchPage() {
 
 const screenBackgroundStyle: CSSProperties = {
   padding: "36px 20px 56px",
-  background:
-    "linear-gradient(120deg, rgba(255, 255, 255, 0.92) 58%, rgba(255, 255, 255, 0.7) 72%, rgba(255, 255, 255, 0) 88%), var(--page-gradient)",
+  background: "var(--page-gradient-overlay), var(--page-gradient)",
   minHeight: "100vh",
+  borderRadius: "0 0 26px 26px",
+  overflow: "hidden",
 };
 
 const contentContainerStyle: CSSProperties = {

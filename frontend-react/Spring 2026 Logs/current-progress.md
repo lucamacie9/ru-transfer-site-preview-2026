@@ -17,6 +17,7 @@ Log of changes and progress for teammates. Intended to be committed and pushed w
 - Added gradient sampling utility `frontend-react/design_team_assets/pixel_sample_gradient.py` for color extraction/testing from source images.
 - Added `frontend-react/design_team_assets/gradient_hex_helper.md` documenting canonical sampled hex stops and correct implementation patterns for page backgrounds and component surfaces.
 - Added Match page variant guidance (right-side white overlay over sampled base gradient) to both `pixel_sample_gradient.py` and `gradient_hex_helper.md`, and applied the variant to `/match` for mock parity testing.
+- Rolled the same gradient-overlay behavior and rounded layout framing to all pages (navbar, body container, and footer corners) and tuned overlay stops to preserve left-side sampled green while emphasizing right-side white.
 
 *— lucamacie9, April 29, 2026*
 

@@ -1,6 +1,5 @@
 // src/components/layout/AppLayout.tsx
-import { Outlet, Link } from 'react-router-dom';
-import { useNavigate } from 'react-router-dom';
+import { Outlet, Link, useNavigate } from 'react-router-dom';
 import { useRoleView } from '../../context/RoleViewContext';
 import { useTheme } from '../../context/ThemeContext';
 
@@ -30,6 +29,8 @@ function AppLayout() {
           display: 'flex',
           alignItems: 'center',
           gap: '24px',
+          borderRadius: '14px',
+          margin: '10px 10px 0',
         }}
       >
         <div style={{ fontWeight: 600, fontSize: '1rem' }}>Transfer Credit Match</div>
@@ -150,7 +151,15 @@ function AppLayout() {
       )}
 
       {/* Main Content Area (Pages will render here) */}
-      <main style={{ flex: 1, padding: '2rem' }}>
+      <main
+        style={{
+          flex: 1,
+          padding: '2rem',
+          margin: '0 10px',
+          borderRadius: '0 0 26px 26px',
+          overflow: 'hidden',
+        }}
+      >
         <Outlet />
       </main>
 
@@ -163,6 +172,8 @@ function AppLayout() {
            textAlign: 'center',
            fontSize: '0.85rem',
            boxShadow: '0 -2px 10px rgba(0,0,0,0.15)',
+           borderRadius: '14px',
+           margin: '0 10px 10px',
         }}
       >
         © {new Date().getFullYear()} Transfer Credit Match. All rights reserved.

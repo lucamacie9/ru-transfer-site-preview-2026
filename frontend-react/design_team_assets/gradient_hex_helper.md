@@ -92,6 +92,32 @@ Why this works:
 - The top white layer softens only the right upper/mid area.
 - Card text remains legible because cards still sit on white/light panel surfaces.
 
+## Layout Framing (Rounded Nav, Body, Footer)
+
+To match the latest UI framing across pages, apply rounded corners to the global
+layout wrappers (not just one route):
+
+```tsx
+// AppLayout pattern (inline style example)
+nav: {
+  borderRadius: '14px',
+  margin: '10px 10px 0',
+}
+
+main: {
+  margin: '0 10px',
+  borderRadius: '0 0 26px 26px',
+  overflow: 'hidden',
+}
+
+footer: {
+  borderRadius: '14px',
+  margin: '0 10px 10px',
+}
+```
+
+This keeps the gradient visible while giving the page a card-like framed shell.
+
 ## Common Mistakes
 
 - Using a different middle stop than `#baf2d2` (visual drift from sampled design)

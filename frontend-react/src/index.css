@@ -1,6 +1,14 @@
 :root {
   --bg-color: #d9f2e2;
   --page-gradient: linear-gradient(180deg, #f7fcf8 0%, #baf2d2 50%, #a5ebb6 100%);
+  --page-gradient-overlay: linear-gradient(
+    120deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0) 58%,
+    rgba(255, 255, 255, 0.42) 78%,
+    rgba(255, 255, 255, 0.95) 92%,
+    rgba(255, 255, 255, 0.99) 100%
+  );
   --text-color: #173a24;
 
   --nav-bg: #06582b;
@@ -12,6 +20,14 @@
 [data-theme="dark"] {
   --bg-color: #172119;
   --page-gradient: linear-gradient(180deg, #1a2b1f 0%, #214630 50%, #183323 100%);
+  --page-gradient-overlay: linear-gradient(
+    120deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0) 58%,
+    rgba(255, 255, 255, 0.03) 78%,
+    rgba(255, 255, 255, 0.06) 92%,
+    rgba(255, 255, 255, 0.08) 100%
+  );
   --text-color: #e6f2ea;
 
   --nav-bg: #173905d7;
@@ -24,7 +40,7 @@
 
 body {
   background-color: var(--bg-color);
-  background-image: var(--page-gradient);
+  background-image: var(--page-gradient-overlay), var(--page-gradient);
   color: var(--text-color);
   transition: background-color 0.3s ease, background-image 0.3s ease, color 0.3s ease;
 }
