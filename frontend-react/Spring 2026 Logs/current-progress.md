@@ -5,6 +5,20 @@ Log of changes and progress for teammates. Intended to be committed and pushed w
 **Location:** This log lives under `frontend-react/Spring 2026 Logs/` so all frontend deliverables (code + docs) are in one place when pushing to origin.
 
 ---
+## 2026-04-29
+
+### Site-wide gradient rollout + design assets sync
+
+- **Site-wide gradient pass** - lucamacie9
+- Applied a shared global gradient in `src/index.css` so all routes render with the same background treatment in light and dark themes.
+- Updated top-level page wrappers to keep backgrounds transparent where needed so the global gradient shows through while preserving readable card/text contrast.
+- Refined `/match` to use the shared gradient token and removed page-specific body background override logic.
+- Added frontend design asset directory content under `frontend-react/design_team_assets/` for team handoff/reference.
+- Added gradient sampling utility `frontend-react/design_team_assets/pixel_sample_gradient.py` for color extraction/testing from source images.
+
+*— lucamacie9, April 29, 2026*
+
+---
 ## 2026-04-27
 
 ### Transcript Upload 

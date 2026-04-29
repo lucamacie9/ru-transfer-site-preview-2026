@@ -411,7 +411,7 @@ const pageStyle = {
   padding: "36px 20px 56px",
   maxWidth: "1150px",
   margin: "0 auto",
-  backgroundColor: "#f7faf8",
+  background: "var(--page-gradient)",
   minHeight: "100vh",
 };
 

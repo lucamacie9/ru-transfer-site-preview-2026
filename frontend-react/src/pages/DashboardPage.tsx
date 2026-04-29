@@ -114,7 +114,7 @@ function DashboardPage() {
     <div
       style={{
         minHeight: '100vh',
-        backgroundColor: '#f7faf8',
+        backgroundColor: 'transparent',
         maxWidth: 980,
         margin: '0 auto',
         padding: '2.5rem 1rem',

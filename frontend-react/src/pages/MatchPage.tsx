@@ -89,24 +89,6 @@ function MatchPage() {
     };
   }, [authEmail, authPassword]);
 
-  // Ensure the *entire screen* (global `body` background) matches the mock gradient.
-  // `index.css` sets a solid green `body { background-color: var(--bg-color) }`, which can show
-  // through around our page wrapper padding.
-  useEffect(() => {
-    const gradient =
-      "linear-gradient(180deg, #f7fcf8 0%, #baf2d2 50%, #a5ebb6 100%)";
-    const prevBackground = document.body.style.background;
-    const prevBackgroundColor = document.body.style.backgroundColor;
-
-    document.body.style.background = gradient;
-    document.body.style.backgroundColor = "transparent";
-
-    return () => {
-      document.body.style.background = prevBackground;
-      document.body.style.backgroundColor = prevBackgroundColor;
-    };
-  }, []);
-
   const { transferCourseOptions, targetCourseOptions } = useMemo(() => {
     if (!apiCourses.length) {
       return { transferCourseOptions: [], targetCourseOptions: [] };
@@ -890,8 +872,7 @@ function MatchPage() {
 
 const screenBackgroundStyle: CSSProperties = {
   padding: "36px 20px 56px",
-  background:
-    "linear-gradient(180deg, #f7fcf8 0%, #baf2d2 50%, #a5ebb6 100%)",
+  background: "var(--page-gradient)",
   minHeight: "100vh",
 };
 

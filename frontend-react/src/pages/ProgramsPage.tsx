@@ -221,7 +221,7 @@ function ProgramsPage() {
 
 const pageStyle: React.CSSProperties = {
   minHeight: '100vh',
-  backgroundColor: '#f4fbf6',
+  backgroundColor: 'transparent',
   paddingBottom: '50px',
 }
 

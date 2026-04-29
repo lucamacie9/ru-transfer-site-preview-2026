@@ -1,0 +1,66 @@
+Package Report
+
+-----------------------------------------------------------------------------
+Document:
+Name: BRANDBOARD_ST.ai
+Color Mode: CMYK color
+Color Profile: none
+Ruler Units: inches
+Artboard Dimensions: 11.5 in x 17 in
+Show Images in Outline Mode: OFF
+Highlight Substituted Fonts: OFF
+Highlight Substituted Glyphs: OFF
+Preserve Text Editability
+Simulate Colored Paper: OFF
+
+-----------------------------------------------------------------------------
+Spot Color Objects:
+
+-----------------------------------------------------------------------------
+Missing Fonts:NONE
+
+-----------------------------------------------------------------------------
+Protected Fonts that were not packaged:NONE
+
+-----------------------------------------------------------------------------
+Fonts:
+Tw Cen MT Condensed Extra Bold (OTF)
+JUST Sans Regular (OTF)
+JUST Sans ExBold (OTF)
+
+-----------------------------------------------------------------------------
+Embedded Fonts:
+NONE
+
+-----------------------------------------------------------------------------
+Missing Links:
+NONE
+
+-----------------------------------------------------------------------------
+Linked Images:
+
+/Users/daniilondon/Desktop/1.png
+Type: Transparent RGB
+Bits per Pixel: 32
+Channels: 4
+Size: 41687K, 4000 by 2668 pixels
+Dimensions: 202.568 by 135.113 points 
+Resolution: 1421.744 by 1421.744 pixels per inch
+
+
+/Users/daniilondon/Desktop/2.png
+Type: RGB
+Bits per Pixel: 24
+Channels: 3
+Size: 35156K, 4000 by 3000 pixels
+Dimensions: 373.664 by 280.248 points 
+Resolution: 770.746 by 770.746 pixels per inch
+
+
+/Users/daniilondon/Desktop/3.png
+Type: Transparent RGB
+Bits per Pixel: 32
+Channels: 4
+Size: 21093K, 2700 by 2000 pixels
+Dimensions: 270.879 by 200.651 points 
+Resolution: 717.663 by 717.663 pixels per inch

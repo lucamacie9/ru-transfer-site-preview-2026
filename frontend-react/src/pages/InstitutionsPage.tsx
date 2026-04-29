@@ -144,7 +144,7 @@ function InstitutionsPage() {
   }
 
   return (
-    <div style={{ background: '#F8F9FA', paddingTop: 60 }}>
+    <div style={{ background: 'transparent', paddingTop: 60 }}>
       <div
         style={{
           position: 'relative',
