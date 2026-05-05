@@ -40,23 +40,6 @@ type CourseAutocompleteItem = AutocompleteItem & {
   courseId: number;
 };
 
-type MatchInfo = { to: string; type: string };
-
-type ProgramCourseData = {
-  fromCourses: string[];
-  toCourses: string[];
-  matches: Record<string, MatchInfo>;
-};
-
-type SavedTransferPlan = {
-  id: number;
-  program: string;
-  fromCourses: string[];
-  toCourse: string;
-};
-
-type MatchLocationState = { selectedProgram?: string };
-
 function MatchPage() {
   const location = useLocation();
   const { authEmail, authPassword, isLoggedIn, role } = useRoleView();
@@ -254,7 +237,7 @@ function MatchPage() {
   const [transcriptFile, setTranscriptFile] = useState<File | null>(null);
   const [transcriptMessage, setTranscriptMessage] = useState("");
 
-  const currentProgramData = programCourseData[program]!;
+  const currentProgramData = programCourseData[program];
 
   useEffect(() => {
     setSelectedFromCourses([]);
