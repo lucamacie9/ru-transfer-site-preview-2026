@@ -58,7 +58,7 @@ function DashboardPage() {
           { label: 'Programs', value: String(programs?.length ?? 0) },
           {
             label: 'Courses',
-            value: coursesCount === null ? 'Login as admin/director' : String(coursesCount),
+            value: String(coursesCount ?? 0),
           },
           { label: 'Knowledge Units', value: String(kuList?.length ?? 0) },
         ]);
@@ -67,7 +67,7 @@ function DashboardPage() {
           setStatCards([
             { label: 'Institutions', value: '?' },
             { label: 'Programs', value: '?' },
-            { label: 'Courses', value: '?' },
+            { label: 'Courses', value: '0' },
             { label: 'Knowledge Units', value: '?' },
           ]);
         }
@@ -169,7 +169,7 @@ function DashboardPage() {
               fontSize: '0.78rem',
             }}
           >
-            Director
+            {roleLabel}
           </p>
           <h1 style={{ margin: '0.35rem 0 0 0', fontSize: '2.5rem', lineHeight: 1, color: '#0f172a' }}>
             Dashboard
@@ -183,7 +183,7 @@ function DashboardPage() {
               marginTop: '1.1rem',
               display: 'flex',
               gap: '0.45rem',
-              flexWrap: 'nowrap',
+              flexWrap: 'wrap',
               alignItems: 'center',
             }}
           >
@@ -217,6 +217,23 @@ function DashboardPage() {
               }}
             >
               View as Admin
+            </button>
+            <button
+              type="button"
+              onClick={() => setRole('director')}
+              style={{
+                borderRadius: 999,
+                border: role === 'director' ? '1px solid #2f7e41' : '1px solid #bbd8c3',
+                background: role === 'director' ? '#2f7e41' : '#ffffff',
+                color: role === 'director' ? '#fff' : '#174125',
+                padding: '0.3rem 0.65rem',
+                fontWeight: 700,
+                fontSize: '0.78rem',
+                cursor: 'pointer',
+                whiteSpace: 'nowrap',
+              }}
+            >
+              View as Director
             </button>
             <button
               type="button"
